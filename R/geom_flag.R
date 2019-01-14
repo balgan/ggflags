@@ -1,15 +1,15 @@
 
 flagGrob <- function(x, y, country, size=1, alpha=1){
   # grob(x=x, y=y, country=country, size=size, cl = "flag")
-  gTree(x = x, y = y, country = country, size = size, cl = "flag")
+  gTree(x = x, y = y, country = tolower(country), size = size, cl = "flag")
 }
 
 #' @export
 makeContent.flag <- function(x) {
-  flag_pics <- lapply(seq_along(x$country),
+  flag_pics <- lapply(seq_along(tolower(x$country)),
     function(ii) {
       grImport2::pictureGrob(
-        picture = .flaglist[[x$country[[ii]]]],
+        picture = .flaglist[[tolower(x$country[[ii]])]],
         x = x$x[ii], y = x$y[ii],
         width = x$size[ii] * unit(1, "mm"),
         height = x$size[ii] * unit(1, "mm"),
